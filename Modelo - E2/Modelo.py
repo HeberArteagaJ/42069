@@ -363,7 +363,7 @@ for p in P:
                                 1 - (DISPj * x[j, m, d, t]) >= DISPp * x[p, m, d, t])
 
 # Comprobación de Output
-print("Restricción 25 - Ok")
+print("Restricción 15 - Ok")
 check_a = time()
 print(check_a-check_p)
 print()
@@ -376,7 +376,7 @@ model.optimize()
 model.printAttr("X")
 
 lista_datos = []
-lista_datos.append(["Tiempo de Ejecución", model.runtime])
+lista_datos.append(["Tiempo de Ejecución (s)", model.runtime])
 lista_datos.append(["Valor de la Función Objetivo", model.objVal])
 
 

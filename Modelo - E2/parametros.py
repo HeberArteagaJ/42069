@@ -5,6 +5,7 @@ Paths = {
     'pacientes': 'Datos Pacientes.xlsx',
     'medicos': 'Datos Medicos.xlsx',
     'parametros': 'Parametros.xlsx',
+    'resultados': 'Resultados.csv'
 }
 
 # CONJUNTOS
