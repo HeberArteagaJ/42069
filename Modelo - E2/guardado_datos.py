@@ -55,7 +55,7 @@ def guardar_variables(variables, Pacientes, P, M, D, lista_datos):
     with open(filename, "w", encoding="UTF8") as archive:
 
         # Titulos
-        titles = "Nombre,Valor\n"
+        titles = "Elemento,Valor\n"
         archive.write(titles)
         archive.truncate()
 
@@ -63,7 +63,7 @@ def guardar_variables(variables, Pacientes, P, M, D, lista_datos):
         text = f"Pacientes Totales,{len(P)}\n\
 Pacientes Prioritarios,{n_prioritarios}\n\
 Médicos Totales,{len(M)}\n\
-Días Totales,{len(D)}\n"
+Días Totales,{len(D)}\n\n"
         #text1 = f"\nPacientes Prioritarios,{n_prioritarios}\n"
         # archive.write(text1)
         archive.write(text)
@@ -72,6 +72,8 @@ Días Totales,{len(D)}\n"
         for data in lista_datos:
             text = f"{data[0]},{data[1]}\n"
             archive.write(text)
+
+        archive.write("\n")
 
         # Solución Óptima
         for variable in variables:

@@ -378,9 +378,6 @@ model.printAttr("X")
 lista_datos = []
 lista_datos.append(["Tiempo de Ejecución (s)", model.runtime])
 lista_datos.append(["Valor de la Función Objetivo", model.objVal])
-
+lista_datos.append(["Nodos utilizados", model.NodeCount])
 
 guardar_variables(model.getVars(), Pacientes, P, M, D, lista_datos)
-
-"""for v in model.getVars():
-    print(v.varName, v.x)"""
