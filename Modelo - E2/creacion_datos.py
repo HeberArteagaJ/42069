@@ -30,7 +30,6 @@ def generacion_examenes(pacientes, dias, dias_examenes):
 
         examenes_pacientes.append((paciente, examenes_validos))
 
-    print(examenes_pacientes)
     return examenes_pacientes
 
 
@@ -58,10 +57,6 @@ def generación_disponibles(pacientes, medicos, dias, bloques):  # MODIFICAR
     for paciente in pacientes:
 
         disponibles_paciente = []
-
-        """consultas_min = int(len(dias))  # Cambiar a Parámetros
-        consultas_max = int(len(dias) * (len(bloques) / 3)
-                            )  # Cambiar a Parámetros"""
 
         consultas_min = par.Pacientes['n_DISP_min']
         consultas_max = par.Pacientes['n_DISP_max']

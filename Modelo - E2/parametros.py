@@ -1,11 +1,26 @@
 from carga_datos import carga_parametros
+import os
 
-# PATHS
+# PATHS & FOLDERS
+Folders = {
+    'base_datos': 'Base de Datos',
+    'parametros': 'Parametros',
+    'resultados': 'Resultados',
+    'test': 'Test'
+}
+
 Paths = {
-    'pacientes': 'Datos Pacientes.xlsx',
-    'medicos': 'Datos Medicos.xlsx',
-    'parametros': 'Parametros.xlsx',
-    'resultados': 'Resultados.csv'
+    'pacientes': os.path.join(Folders['base_datos'], "Datos Pacientes.xlsx"),
+    'medicos': os.path.join(Folders['base_datos'], "Datos Medicos.xlsx"),
+    'parametros': os.path.join(Folders['parametros'], "Parametros.xlsx"),
+    'resultados': os.path.join(Folders['resultados'], "Resultados.csv")
+}
+
+Test = {
+    'pacientes': os.path.join(Folders['test'], "Datos Pacientes.xlsx"),
+    'medicos': os.path.join(Folders['test'], "Datos Medicos.xlsx"),
+    'parametros': os.path.join(Folders['test'], "Parametros.xlsx"),
+    'resultados': os.path.join(Folders['test'], "Resultados.csv")
 }
 
 # CONJUNTOS
