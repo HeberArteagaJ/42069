@@ -7,10 +7,10 @@ from carga_datos import carga_datos, carga_disponibles, carga_paciente, carga_jo
 from guardado_datos import guardar_variables, registro_tiempos, registro_medicos
 
 # ARCHIVOS
-#filename_pacientes = par.Paths['pacientes']
-#filename_medicos = par.Paths['medicos']
-filename_pacientes = par.Test['pacientes']
-filename_medicos = par.Test['medicos']
+filename_pacientes = par.Paths['pacientes']
+filename_medicos = par.Paths['medicos']
+#filename_pacientes = par.Test['pacientes']
+#filename_medicos = par.Test['medicos']
 
 seed(42069)
 model = Model("Recalendarización Operaciones Electivas")
@@ -93,6 +93,8 @@ y = model.addVars(P, M, D, T, vtype=GRB.BINARY, name="y")
 # Variable que indica el numero de personal ilibre de cada especialidad
 lib = model.addVars(A, D, T, vtype=GRB.INTEGER, lb=0, name="l")
 
+#c = model.addVar(vtype=GRB.CONTINUOUS, lb=0, name="CME")
+
 # Comprobación de Output
 print("Variables - Ok")
 check_a = time()
@@ -118,6 +120,9 @@ costo_insumos = quicksum(x[p, m, d, t] * CI[p]
 model.setObjective(costo_medico + costo_medico_extra +
                    costo_personal + costo_insumos, GRB.MINIMIZE)
 
+"""model.setObjective(costo_medico + c +
+                   costo_personal + costo_insumos, GRB.MINIMIZE)"""
+
 # Comprobación de Output
 print("FO - Ok")
 check_a = time()
@@ -125,6 +130,11 @@ print(check_a-check_p)
 t_FO = check_a-check_p
 print()
 check_restr_i = check_a
+
+
+# Restricción 0
+"""model.addConstrs(
+    (c >= costo_medico_extra for p in P for m in M for d in D for t in T))"""
 
 
 # RESTRICCIONES
@@ -384,6 +394,7 @@ check_p = check_restr_f
 # Tiempo de Restricciones
 t_restricciones = check_restr_f-check_restr_i
 
+
 model.optimize()
 
 
@@ -433,3 +444,11 @@ for m in M:
     lista_medicos.append([m, int(sum_y)])
 
 registro_medicos(lista_medicos)
+
+
+"""for p in P:
+    for m in M:
+        for d in D:
+            for t in range():
+
+y[p, m, d, t]"""

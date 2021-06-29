@@ -6,14 +6,15 @@ from paciente import Paciente
 from creacion_datos import generacion_examenes, generacion_insumos, generación_disponibles, generacion_jornadas
 
 
-#filename = par.Paths['resultados']
+filename = par.Paths['resultados']
 #filename = par.PathsE2['resultados']
-filename = par.Test['resultados']
+#filename = par.Test['resultados']
 
-#filename = par.Paths['tiempos']
-filename_time = par.Test['tiempos']
+filename_time = par.Paths['tiempos']
+#filename_time = par.Test['tiempos']
 
-filename_trabajo_medicos = par.Test['trabajo_medicos']
+filename_trabajo_medicos = par.Paths['trabajo_medicos']
+#filename_trabajo_medicos = par.Test['trabajo_medicos']
 
 
 def guardar_variables(variables, Pacientes, P, M, D, lista_datos):

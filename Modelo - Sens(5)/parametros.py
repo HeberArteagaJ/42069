@@ -6,30 +6,41 @@ Folders = {
     'base_datos': 'Base de Datos',
     'parametros': 'Parametros',
     'resultados': 'Resultados',
-    'test': 'Test'
+    'tiempos': 'Tiempos',
+    'test': 'Test',
+    'E2': 'Datos - E2'
 }
 
 Paths = {
     'pacientes': os.path.join(Folders['base_datos'], "Datos Pacientes.xlsx"),
     'medicos': os.path.join(Folders['base_datos'], "Datos Medicos.xlsx"),
     'parametros': os.path.join(Folders['parametros'], "Parametros.xlsx"),
-    'resultados': os.path.join(Folders['resultados'], "Resultados.csv")
+    'resultados': os.path.join(Folders['resultados'], "Resultados.csv"),
+    'tiempos': os.path.join(Folders['tiempos'], "Tiempos.csv")
 }
 
 Test = {
     'pacientes': os.path.join(Folders['test'], "Datos Pacientes.xlsx"),
     'medicos': os.path.join(Folders['test'], "Datos Medicos.xlsx"),
     'parametros': os.path.join(Folders['test'], "Parametros.xlsx"),
-    'resultados': os.path.join(Folders['test'], "Resultados.csv")
+    'resultados': os.path.join(Folders['test'], "Resultados.csv"),
+    'tiempos': os.path.join(Folders['test'], "Tiempos.csv"),
+    'trabajo_medicos': os.path.join(Folders['test'], "Trabajo Medicos.csv")
 }
 
+PathsE2 = {
+    'pacientes': os.path.join(Folders['E2'], Folders['base_datos'], "Datos Pacientes.xlsx"),
+    'medicos': os.path.join(Folders['E2'], Folders['base_datos'], "Datos Medicos.xlsx"),
+    'parametros': os.path.join(Folders['E2'], Folders['parametros'], "Parametros.xlsx"),
+    'resultados': os.path.join(Folders['E2'], Folders['resultados'], "Resultados.csv")
+}
 # CONJUNTOS
 Indices = {
-    'n_P': 10,
+    'n_P': 30,
     'M': 15,  # int(carga_parametros(Paths['parametros'], 'C2')),
-    'A': 3,  # Enfermero, TENS, anestesistas
+    'A': 4,  # Médicos, Enfermero, TENS, anestesistas
     'S': int(carga_parametros(Paths['parametros'], 'C11')),
-    'D': 30,
+    'D': 10,
     'T': 96,
     'T_PRI_min': 32,
     'T_PRI_max': 48
@@ -47,8 +58,8 @@ INS_T = 0.7
 INS_F = 0.3
 
 Pacientes = {
-    'disp_min': 32,
-    'disp_max': 80,
+    'disp_min': 0,
+    'disp_max': 96,
     'n_DISP_min': Indices['D'],
     'n_DISP_max': int(Indices['D'] * (Indices['T'] / 3))
 }
@@ -77,26 +88,32 @@ Parametros = {
 # Personal Médico
 PM = {
     'CANT_PER': {
-        1: int(carga_parametros(Paths['parametros'], 'C3')),
-        2: int(carga_parametros(Paths['parametros'], 'C4')),
-        3: int(carga_parametros(Paths['parametros'], 'C5'))
+        1: int(Indices['M']),
+        2: int(carga_parametros(Paths['parametros'], 'C3')),
+        3: int(carga_parametros(Paths['parametros'], 'C4')),
+        4: int(carga_parametros(Paths['parametros'], 'C5'))
     },
     'CANT_PER_MIN': 10,
     'COSTOS_A': {
-        1: int(carga_parametros(Paths['parametros'], 'C7')),
-        2: int(carga_parametros(Paths['parametros'], 'C8')),
-        3: int(carga_parametros(Paths['parametros'], 'C9'))
+        1: int(Parametros['CM']),
+        2: int(carga_parametros(Paths['parametros'], 'C7')),
+        3: int(carga_parametros(Paths['parametros'], 'C8')),
+        4: int(carga_parametros(Paths['parametros'], 'C9'))
     },
     'CANT_REQ': {
         1: {
+            'min': 0,
+            'max': 2
+        },
+        2: {
             'min': int(carga_parametros(Paths['parametros'], 'C17')),
             'max': int(carga_parametros(Paths['parametros'], 'D17'))
         },
-        2: {
+        3: {
             'min': int(carga_parametros(Paths['parametros'], 'C18')),
             'max': int(carga_parametros(Paths['parametros'], 'D18'))
         },
-        3: {
+        4: {
             'min': int(carga_parametros(Paths['parametros'], 'C19')),
             'max': int(carga_parametros(Paths['parametros'], 'D19'))
         }

@@ -4,13 +4,13 @@ from time import time
 
 import parametros as par
 from carga_datos import carga_datos, carga_disponibles, carga_paciente, carga_jornadas
-from guardado_datos import guardar_variables, registro_tiempos
+from guardado_datos import guardar_variables, registro_tiempos, registro_medicos
 
 # ARCHIVOS
-#filename_pacientes = par.Paths['pacientes']
-#filename_medicos = par.Paths['medicos']
-filename_pacientes = par.Test['pacientes']
-filename_medicos = par.Test['medicos']
+filename_pacientes = par.Paths['pacientes']
+filename_medicos = par.Paths['medicos']
+#filename_pacientes = par.Test['pacientes']
+#filename_medicos = par.Test['medicos']
 
 seed(42069)
 model = Model("Recalendarización Operaciones Electivas")
@@ -147,14 +147,14 @@ check_p = check_a
     quicksum(x[p, m, d, t] for m in M) for d in D) for t in T) == 1 for p in P))"""
 
 POR1 = par.Parametros['POR1']
-POR2 = par.Parametros['POR1']
-POR3 = par.Parametros['POR1']
+POR2 = par.Parametros['POR2']
+POR3 = par.Parametros['POR3']
 
 model.addConstrs((quicksum(quicksum(
     quicksum(x[p, m, d, t] for m in M) for d in D) for t in T) <= 1 for p in P))
 
 model.addConstr(quicksum(quicksum(quicksum(
-    quicksum(x[p, m, d, t] for m in M) for d in D) for t in T) for p in P) >= len(P) * POR1)  # Se modifica POR(1,2,3)
+    quicksum(x[p, m, d, t] for m in M) for d in D) for t in T) for p in P) >= len(P) * POR3)  # Se modifica POR(1,2,3)
 
 # Comprobación de Output
 print("Restricción 2 - Ok")
@@ -441,3 +441,5 @@ for m in M:
         print(f"M = 1, {sum_y}")"""
 
     lista_medicos.append([m, int(sum_y)])
+
+registro_medicos(lista_medicos)

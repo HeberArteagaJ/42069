@@ -1,12 +1,13 @@
-Nombre,Valor
-
- Pacientes Totales,10
+Elemento,Valor
+Pacientes Totales,10
+Pacientes Prioritarios,2
 Médicos Totales,15
 Días Totales,30
 
-Pacientes Prioritarios,2
-Tiempo de Ejecución,13.569928169250488
+Tiempo de Ejecución (s),16.843310117721558
 Valor de la Función Objetivo,2039258.0000000075
+Nodos utilizados,0.0
+
 x[1|5|14|34],1.0
 x[2|7|16|58],1.0
 x[3|5|8|51],1.0

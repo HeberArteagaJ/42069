@@ -4,11 +4,13 @@ from time import time
 
 import parametros as par
 from carga_datos import carga_datos, carga_disponibles, carga_paciente, carga_jornadas
-from guardado_datos import guardar_variables
+from guardado_datos import guardar_variables, registro_tiempos, registro_medicos
 
 # ARCHIVOS
-filename_pacientes = par.Paths['pacientes']
-filename_medicos = par.Paths['medicos']
+#filename_pacientes = par.Paths['pacientes']
+#filename_medicos = par.Paths['medicos']
+filename_pacientes = par.Test['pacientes']
+filename_medicos = par.Test['medicos']
 
 seed(42069)
 model = Model("Recalendarización Operaciones Electivas")
@@ -23,17 +25,23 @@ A = range(1, par.Indices['A'] + 1)  # Personal médico [List]
 D = range(1, par.Indices['D'] + 1)  # Días [Int]
 T = range(1, par.Indices['T'] + 1)  # Tiempo (en bloques de 15 min) [Int]
 
+# Tiempo prioritario - Subconjunto de T [Int] (en min)
+T_PRI = range(par.Indices['T_PRI_min'], par.Indices['T_PRI_max'] + 1)
+
+# Tiempo de Índices
+check_a = time()
+t_indices = check_a-check_p
+check_p = check_a
+
 # Instancias - Clase Paciente
 Pacientes = [carga_paciente(filename_pacientes, p)
              for p in P]
-
-# Tiempo prioritario - Subconjunto de T [Int] (en min)
-T_PRI = range(par.Indices['T_PRI_min'], par.Indices['T_PRI_max'] + 1)
 
 # Comprobación de Output
 print("Pacientes - Ok")
 check_a = time()
 print(check_a-check_p)
+t_clases_pacientes = check_a-check_p
 print()
 check_p = check_a
 
@@ -61,6 +69,7 @@ PER = {(a, d, t): randint(
 print("Parametros - Ok")
 check_a = time()
 print(check_a-check_p)
+t_parametros = check_a-check_p
 print()
 check_p = check_a
 
@@ -71,6 +80,7 @@ JOR = carga_jornadas(M, D, T, filename_medicos)
 print("JOR - Ok")
 check_a = time()
 print(check_a-check_p)
+t_jornadas = check_a-check_p
 print()
 check_p = check_a
 
@@ -87,6 +97,7 @@ lib = model.addVars(A, D, T, vtype=GRB.INTEGER, lb=0, name="l")
 print("Variables - Ok")
 check_a = time()
 print(check_a-check_p)
+t_variables = check_a-check_p
 print()
 check_p = check_a
 
@@ -111,8 +122,9 @@ model.setObjective(costo_medico + costo_medico_extra +
 print("FO - Ok")
 check_a = time()
 print(check_a-check_p)
+t_FO = check_a-check_p
 print()
-check_p = check_a
+check_restr_i = check_a
 
 
 # RESTRICCIONES
@@ -124,7 +136,7 @@ model.addConstrs((quicksum(y[p, m, d, t]
 # Comprobación de Output
 print("Restricción 1 - Ok")
 check_a = time()
-print(check_a-check_p)
+print(check_a-check_restr_i)
 print()
 check_p = check_a
 
@@ -177,7 +189,7 @@ check_p = check_a
 
 # Restricción 5
 # Solo si el médico está disponible se podría efectuar la operación.
-"""model.addConstrs((JOR[m, d, t] >= quicksum(x[p, m, d, t] for p in P)
+model.addConstrs((JOR[m, d, t] >= quicksum(x[p, m, d, t] for p in P)
                  for m in M for d in D for t in T))
 
 # Comprobación de Output
@@ -185,7 +197,7 @@ print("Restricción 5 - Ok")
 check_a = time()
 print(check_a-check_p)
 print()
-check_p = check_a"""
+check_p = check_a
 
 # Restricción 6
 # Solo se puede realizar la operación si están los insumos necesarios.
@@ -370,10 +382,13 @@ for p in P:
 
 # Comprobación de Output
 print("Restricción 15 - Ok")
-check_a = time()
-print(check_a-check_p)
+check_restr_f = time()
+print(check_restr_f-check_p)
 print()
-check_p = check_a
+check_p = check_restr_f
+
+# Tiempo de Restricciones
+t_restricciones = check_restr_f-check_restr_i
 
 model.optimize()
 
@@ -387,3 +402,40 @@ lista_datos.append(["Valor de la Función Objetivo", model.objVal])
 lista_datos.append(["Nodos utilizados", model.NodeCount])
 
 guardar_variables(model.getVars(), Pacientes, P, M, D, lista_datos)
+
+
+# Registro de tiempos
+lista_tiempos = []
+lista_tiempos.append(["Índices", t_indices])
+lista_tiempos.append(["Clase - Pacientes", t_clases_pacientes])
+lista_tiempos.append(["Jornadas", t_jornadas])
+lista_tiempos.append(["Parámetros", t_parametros])
+lista_tiempos.append(["Función Objetivo", t_FO])
+lista_tiempos.append(["Variables", t_variables])
+lista_tiempos.append(["Restricciones", t_restricciones])
+
+registro_tiempos(lista_tiempos)
+
+
+# HACER: Calcular horas en operación de cada médico
+#y = model.addVars(P, M, D, T, vtype=GRB.BINARY, name="y")
+
+print()
+lista_medicos = []
+for m in M:
+
+    sum_y = 0
+    for p in P:
+        for d in D:
+            for t in T:
+                sum_y += y[p, m, d, t].x
+
+                """if m == 1:
+                    print(f"y[{p}, {m}, {d}, {t}] = {y[p, m, d, t].x}")"""
+
+    """if m == 1:
+        print(f"M = 1, {sum_y}")"""
+
+    lista_medicos.append([m, int(sum_y)])
+
+registro_medicos(lista_medicos)

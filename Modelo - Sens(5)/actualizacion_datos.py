@@ -87,8 +87,10 @@ if __name__ == "__main__":
     t_examenes = range(p.MIN_EX, p.MAX_EX + 1)
 
     # ARCHIVOS
-    filename_pacientes = p.Paths['pacientes']
-    filename_medicos = p.Paths['medicos']
+    #filename_pacientes = p.Paths['pacientes']
+    #filename_medicos = p.Paths['medicos']
+    filename_pacientes = p.Test['pacientes']
+    filename_medicos = p.Test['medicos']
 
     # CREACIÓN DE EXCEL
     #EXCEL - PACIENTE

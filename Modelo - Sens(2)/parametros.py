@@ -14,18 +14,19 @@ Folders = {
 Paths = {
     'pacientes': os.path.join(Folders['base_datos'], "Datos Pacientes.xlsx"),
     'medicos': os.path.join(Folders['base_datos'], "Datos Medicos.xlsx"),
-    'parametros': os.path.join(Folders['parametros'], "Parametros.xlsx"),
-    'resultados': os.path.join(Folders['resultados'], "Resultados.csv"),
-    'tiempos': os.path.join(Folders['tiempos'], "Tiempos.csv")
+    'parametros': os.path.join(Folders['base_datos'], "Parametros.xlsx"),
+    'resultados': os.path.join(Folders['resultados'], "ResultadosR3.csv"),
+    'tiempos': os.path.join(Folders['resultados'], "TiemposR3.csv"),
+    'trabajo_medicos': os.path.join(Folders['resultados'], "Trabajo MedicosR3.csv")
 }
 
 Test = {
     'pacientes': os.path.join(Folders['test'], "Datos Pacientes.xlsx"),
     'medicos': os.path.join(Folders['test'], "Datos Medicos.xlsx"),
     'parametros': os.path.join(Folders['test'], "Parametros.xlsx"),
-    'resultados': os.path.join(Folders['test'], "Resultados.csv"),
-    'tiempos': os.path.join(Folders['test'], "Tiempos.csv"),
-    'trabajo_medicos': os.path.join(Folders['test'], "Trabajo Medicos.csv")
+    'resultados': os.path.join(Folders['test'], "ResultadosR1.csv"),
+    'tiempos': os.path.join(Folders['test'], "TiemposR1.csv"),
+    'trabajo_medicos': os.path.join(Folders['test'], "Trabajo MedicosR1.csv")
 }
 
 PathsE2 = {
@@ -34,7 +35,6 @@ PathsE2 = {
     'parametros': os.path.join(Folders['E2'], Folders['parametros'], "Parametros.xlsx"),
     'resultados': os.path.join(Folders['E2'], Folders['resultados'], "Resultados.csv")
 }
-
 # CONJUNTOS
 Indices = {
     'n_P': 30,

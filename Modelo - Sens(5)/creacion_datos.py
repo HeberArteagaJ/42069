@@ -10,22 +10,17 @@ def generacion_examenes(pacientes, dias, dias_examenes):
 
         examenes_validos = []
 
-        print("Empieza - Exámenes")
         ind = 0
         for dia in dias:
             if ind > 0:
                 examenes_validos.append(dia)
-                print("Se agrega fecha")
                 ind -= 1
             else:
                 cond = choices(population=[True, False], weights=[
                                par.EX_T, par.EX_F])
 
-                print(f"Cond = {cond}")
-
                 if cond == [True]:
                     examenes_validos.append(dia)
-                    print("Se agrega fecha")
                     ind = choice(dias_examenes)
 
         examenes_pacientes.append((paciente, examenes_validos))

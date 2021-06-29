@@ -24,7 +24,7 @@ print(range(consultas_min, consultas_max + 1))
 print(rango_dias)"""
 
 
-filename = os.path.join("Test", "Parametros.xlsx")
+filename = os.path.join("Datos - E2", "Test", "Parametros.xlsx")
 
 workbook = load_workbook(filename)
 

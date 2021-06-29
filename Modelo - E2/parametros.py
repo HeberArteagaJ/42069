@@ -14,9 +14,10 @@ Folders = {
 Paths = {
     'pacientes': os.path.join(Folders['base_datos'], "Datos Pacientes.xlsx"),
     'medicos': os.path.join(Folders['base_datos'], "Datos Medicos.xlsx"),
-    'parametros': os.path.join(Folders['parametros'], "Parametros.xlsx"),
+    'parametros': os.path.join(Folders['base_datos'], "Parametros.xlsx"),
     'resultados': os.path.join(Folders['resultados'], "Resultados.csv"),
-    'tiempos': os.path.join(Folders['tiempos'], "Tiempos.csv")
+    'tiempos': os.path.join(Folders['resultados'], "Tiempos.csv"),
+    'trabajo_medicos': os.path.join(Folders['resultados'], "Trabajo Medicos.csv")
 }
 
 Test = {
@@ -36,7 +37,7 @@ PathsE2 = {
 }
 # CONJUNTOS
 Indices = {
-    'n_P': 30,
+    'n_P': 45,
     'M': 15,  # int(carga_parametros(Paths['parametros'], 'C2')),
     'A': 4,  # Médicos, Enfermero, TENS, anestesistas
     'S': int(carga_parametros(Paths['parametros'], 'C11')),
