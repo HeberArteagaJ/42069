@@ -146,15 +146,13 @@ check_p = check_a
 """model.addConstrs((quicksum(quicksum(
     quicksum(x[p, m, d, t] for m in M) for d in D) for t in T) == 1 for p in P))"""
 
-POR1 = par.Parametros['POR1']
-POR2 = par.Parametros['POR2']
-POR3 = par.Parametros['POR3']
+POR = par.Parametros['POR']
 
 model.addConstrs((quicksum(quicksum(
     quicksum(x[p, m, d, t] for m in M) for d in D) for t in T) <= 1 for p in P))
 
 model.addConstr(quicksum(quicksum(quicksum(
-    quicksum(x[p, m, d, t] for m in M) for d in D) for t in T) for p in P) >= len(P) * POR3)  # Se modifica POR(1,2,3)
+    quicksum(x[p, m, d, t] for m in M) for d in D) for t in T) for p in P) >= len(P) * POR)  # Se modifica POR(1,2,3)
 
 # Comprobación de Output
 print("Restricción 2 - Ok")

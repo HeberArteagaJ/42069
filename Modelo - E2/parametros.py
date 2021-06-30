@@ -39,11 +39,11 @@ PathsE2 = {
 
 # CONJUNTOS
 Indices = {
-    'n_P': 45,
+    'n_P': 50,
     'M': int(carga_parametros(Paths['parametros'], 'C2')),
     'A': 4,  # Médicos, Enfermero, TENS, anestesistas
     'S': int(carga_parametros(Paths['parametros'], 'C11')),
-    'D': 5,
+    'D': 7,
     'T': 96,
     'T_PRI_min': 32,
     'T_PRI_max': 48
@@ -62,7 +62,7 @@ INS_F = 0.4
 
 Pacientes = {
     'disp_min': 32,
-    'disp_max': 80,
+    'disp_max': 96,
     'n_DISP_min': Indices['D'],
     'n_DISP_max': int(Indices['D'] * (Indices['T'] / 4))
 }

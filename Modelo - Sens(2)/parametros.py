@@ -83,9 +83,7 @@ Parametros = {
     'CI': int(carga_parametros(Paths['parametros'], 'C10')),
     'CM': carga_parametros(Paths['parametros'], 'C6'),
     'PON': carga_parametros(Paths['parametros'], 'C14'),
-    'POR1': 0.8,
-    'POR2': 0.5,
-    'POR3': 0.2
+    'POR': 0.8
 }
 
 
