@@ -35,13 +35,15 @@ PathsE2 = {
     'parametros': os.path.join(Folders['E2'], Folders['parametros'], "Parametros.xlsx"),
     'resultados': os.path.join(Folders['E2'], Folders['resultados'], "Resultados.csv")
 }
+
+
 # CONJUNTOS
 Indices = {
     'n_P': 45,
-    'M': 15,  # int(carga_parametros(Paths['parametros'], 'C2')),
+    'M': int(carga_parametros(Paths['parametros'], 'C2')),
     'A': 4,  # Médicos, Enfermero, TENS, anestesistas
     'S': int(carga_parametros(Paths['parametros'], 'C11')),
-    'D': 10,
+    'D': 5,
     'T': 96,
     'T_PRI_min': 32,
     'T_PRI_max': 48
@@ -52,17 +54,17 @@ Indices = {
 MIN_EX = 2
 MAX_EX = 4
 
-EX_T = 0.7
-EX_F = 0.3
+EX_T = 0.6
+EX_F = 0.4
 
-INS_T = 0.7
-INS_F = 0.3
+INS_T = 0.6
+INS_F = 0.4
 
 Pacientes = {
     'disp_min': 32,
     'disp_max': 80,
     'n_DISP_min': Indices['D'],
-    'n_DISP_max': int(Indices['D'] * (Indices['T'] / 3))
+    'n_DISP_max': int(Indices['D'] * (Indices['T'] / 4))
 }
 
 # JORNADAS

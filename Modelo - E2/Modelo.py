@@ -452,3 +452,9 @@ registro_medicos(lista_medicos)
             for t in range():
 
 y[p, m, d, t]"""
+
+
+CMExtra = quicksum(
+    (1 - JOR[m, d, t]) * y[p, m, d, t].x * CM[m] * PON[m] for p in P for m in M for d in D for t in T)
+
+print(CMExtra)
